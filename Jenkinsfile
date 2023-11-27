@@ -20,7 +20,7 @@ pipeline {
                 script {
                     echo 'building docker image...'
                     withCredentials([usernamePassword(credentialsId: 'amine-docker', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh 'docker build -t aminemighri/mongo-demo .'
+                        sh 'docker-compose up -t aminemighri/mongo-demo .'
                         sh "echo $PASS | docker login -u $USER --password-stdin"
                         sh 'docker push aminemighri/mongo-demo'
                     }
