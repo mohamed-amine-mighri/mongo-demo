@@ -1,12 +1,40 @@
 version: "3.8"
+
 services:
   sb-app:
     build: .
     container_name: "mongo-demo"
     ports:
       - 9090:9090
+    networks:
+      - mynetwork
+    depends_on:
+      - mongodb
+
   mongodb:
     image: mongo:latest
     container_name: "mongodb"
     ports:
-      - 27070:27017
+      - "27070:27017"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+
+
+
+#version: "3.8"
+#services:
+#  sb-app:
+#    build: .
+#    container_name: "mongo-demo"
+#    ports:
+#      - 9090:9090
+#  mongodb:
+#    image: mongo:latest
+#    container_name: "mongodb"
+#    ports:
+#      - 27070:27017
