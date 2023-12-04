@@ -39,7 +39,7 @@ pipeline {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
 
                     // Push the image to Docker Hub
-                    sh 'docker push aminemighri/mongo-demo:latest'
+                    sh 'docker push aminemighri/mongo-demo'
                 }
             }
         }
