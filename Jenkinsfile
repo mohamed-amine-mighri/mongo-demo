@@ -33,13 +33,13 @@ pipeline {
                     sh 'docker images'
 
                     // Tag the built image
-                    sh 'docker tag mongo-demo aminemighri/mongo-demo'
+                    sh 'docker tag mongo-demo aminemighri/mongo-demo:latest'
 
                     // Log in to Docker Hub
                     sh "echo $PASS | docker login -u $USER --password-stdin"
 
                     // Push the image to Docker Hub
-                    sh 'docker push aminemighri/mongo-demo'
+                    sh 'docker push aminemighri/mongo-demo:latest'
                 }
             }
         }
