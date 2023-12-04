@@ -29,9 +29,6 @@ pipeline {
                     // Build the Docker image using the specified docker-compose file
                     sh 'docker-compose -f docker-compose.yml build'
 
-                    // Verify that the image is built successfully before tagging
-                    sh 'docker images'
-
                     // Tag the built image
                     sh 'docker tag mongo-demo aminemighri/mongo-demo:latest'
 
@@ -44,7 +41,6 @@ pipeline {
             }
         }
     }
-
 
 
         stage("deploy") {
