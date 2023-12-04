@@ -21,7 +21,7 @@ pipeline {
                 echo 'Building Docker image...'
 
                 // Use the credentials plugin to safely handle username and password
-                withCredentials([usernamePassword(credentialsId: 'amine-docker', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerHubCred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 
                     // Ensure the Docker daemon is running
                     sh 'docker info'
