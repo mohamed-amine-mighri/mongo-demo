@@ -33,7 +33,7 @@ pipeline {
                     sh 'docker images'
 
                     // Tag the built image
-                    sh 'docker tag mongo-demo aminemighri/mongo-demo:latest'
+                    sh 'docker tag mongo-demo aminemighri/mongo-demo'
 
                     // Log in to Docker Hub
                     sh "echo $PASS | docker login -u $USER --password-stdin"
