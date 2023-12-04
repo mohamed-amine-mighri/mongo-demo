@@ -30,7 +30,7 @@ pipeline {
                     sh 'docker-compose -f docker-compose.yml build'
 
                     // Tag the built image
-                    sh 'docker tag mongo-demo aminemighri/mongo-demo:latest'
+                    sh 'docker tag aminemighri/mongo-demo aminemighri/mongo-demo:latest'
 
                     // Log in to Docker Hub
                     sh "echo $PASS | docker login -u $USER --password-stdin"
