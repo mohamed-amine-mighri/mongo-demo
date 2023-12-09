@@ -6,14 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    echo 'github'
-                    git 'https://github.com/mohamed-amine-mighri/mongo-demo.git'
-                }
-            }
-        }
 
         stage('Build') {
             steps {
@@ -24,7 +16,12 @@ pipeline {
                 }
             }
         }
-
+        stage('SonarQube Analysis') {
+            def mvn = tool 'Maven';
+            withSonarQubeEnv() {
+                sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=amine-app-scan -Dsonar.projectName='amine-app-scan'"
+            }
+        }
         // stage("build jar") {
         //     steps {
         //         script {
