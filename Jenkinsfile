@@ -26,15 +26,6 @@ pipeline {
                 }
             }
         }
-        // stage("build jar") {
-        //     steps {
-        //         script {
-        //             echo 'building the app...'
-        //             sh 'mvn clean package'
-        //         }
-        //     }
-        // }
-
         stage("Build Image") {
             steps {
                 script {
@@ -73,7 +64,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying the application...'
-                    withEnv(kubeconfigId: "minikubconfig") {
+                    withEnv(["kubeconfigId=minikubconfig"]) {
                         // Apply Kubernetes deployment
                         sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
                         sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
@@ -81,22 +72,5 @@ pipeline {
                 }
             }
         }
-
-        // stage('SCM') {
-        //     steps {
-        //         checkout scm
-        //     }
-        // }
-
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         script {
-        //             def mvn = tool 'Maven';
-        //             withSonarQubeEnv() {
-        //                 sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=amine-app-scan -Dsonar.projectName='amine-app-scan'"
-        //             }
-        //         }
-        //     }
-        // }
     }
 }
