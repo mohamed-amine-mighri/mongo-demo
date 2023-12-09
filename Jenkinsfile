@@ -65,6 +65,9 @@ pipeline {
                 script {
                     echo 'Deploying the application...'
 
+                    // Start Minikube and create the 'minikube' profile
+                    sh 'minikube start -p minikube'
+
                     // Switch to the 'minikube' profile
                     sh 'minikube profile minikube'
 
