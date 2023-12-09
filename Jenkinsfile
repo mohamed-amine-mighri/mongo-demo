@@ -64,11 +64,11 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying the application...'
-                    withEnv(["kubeconfigId=minikubconfig"]) {
-                        // Apply Kubernetes deployment
-                        sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
-                        sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
-                    }
+                    // Apply Kubernetes deployment
+                    sh 'minikube cache add aminemighri/mongo-demo:latest'
+                    sh 'minikube cache reload'
+                    sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
+                    sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
                 }
             }
         }
