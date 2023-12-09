@@ -64,9 +64,14 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying the application...'
-                    // Apply Kubernetes deployment
-                    sh 'minikube cache add aminemighri/mongo-demo:latest'
-                    sh 'minikube cache reload'
+
+                    // Switch to the 'minikube' profile
+                    sh 'minikube profile minikube'
+
+                    // Load the Docker image into Minikube
+                    sh 'minikube image load aminemighri/mongo-demo:latest'
+
+                    // Apply Kubernetes deployments
                     sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
                     sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
                 }
