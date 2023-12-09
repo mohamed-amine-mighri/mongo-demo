@@ -61,12 +61,22 @@ pipeline {
                 }
             }
         }
-
-        stage("deploy") {
+        stage('Pull image for deployment') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'amineDockerHub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh 'docker pull aminemighri/mongo-demo:latest'
+                }
+            }
+        }
+        stage('Deploy') {
             steps {
                 script {
-                    echo "deploying the application..."
-                    // Add your deployment steps here
+                    echo 'Deploying the application...'
+
+                    // Apply Kubernetes deployment
+                    sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
+                    sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
                 }
             }
         }
