@@ -2,7 +2,6 @@ pipeline {
     agent any // Add this line to specify the agent
     environment {
         KUBECONFIG = '--insecure-skip-tls-verify'
-        //KUBECONFIG = 'kubeConfigFile_new'
     }
     tools {
         maven 'Maven'
@@ -65,10 +64,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withCredentials([file(credentialsId: 'kubeConfigFile_new')]) {
-                    sh 'kubectl apply -f ./k8s/mongo-demo-deployment.yaml'
-                    sh 'kubectl apply -f ./k8s/mongodb-deployment.yaml'
-                }
+                sh 'kubectl apply -f ./k8s/mongo-demo-deployment.yaml'
+                sh 'kubectl apply -f ./k8s/mongodb-deployment.yaml'
             }
         }
     }
