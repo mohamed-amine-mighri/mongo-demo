@@ -1,6 +1,8 @@
 pipeline {
     agent any // Add this line to specify the agent
-
+    environment {
+        KUBECONFIG = '--insecure-skip-tls-verify'
+    }
     tools {
         maven 'Maven'
     }
@@ -62,9 +64,6 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-//                 sh 'kubectl --insecure-skip-tls-verify get pods'
-                //sh 'minikube start'
-                //sh 'eval $(minikube docker-env)'
                 sh 'kubectl apply -f ./k8s/mongo-demo-deployment.yaml'
                 sh 'kubectl apply -f ./k8s/mongodb-deployment.yaml'
             }
