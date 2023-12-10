@@ -64,11 +64,10 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying the application...'
-                    kubernetesDeploy(configs: "k8s/mongo-demo-deployment.yaml",
-                                             "k8s/mongodb-deployment.yaml")
+                    sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
+                    sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
                 }
             }
         }
-
     }
 }
