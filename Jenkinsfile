@@ -69,6 +69,7 @@ pipeline {
                     // Deploy the Java Spring app
                     sh """
                           minikube kubectl -- apply -f ./k8s/mongo-demo-deployment.yaml
+                          minikube kubectl -- apply -f ./k8s/mongodb-deployment.yaml
                     """
                     }
                 }
