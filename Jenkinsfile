@@ -64,9 +64,9 @@ pipeline {
             steps {
 //                 sh 'kubectl --insecure-skip-tls-verify get pods'
                 sh 'minikube cache add aminemighri/mongo-demo:latest'
-                sh 'minikube cache reload'
-                sh 'minikube apply -f k8s/mongo-demo-deployment.yaml'
-                sh 'minikube apply -f k8s/mongodb-deployment.yaml'
+                sh 'minikube kubectl cache reload'
+                sh 'minikube kubectl apply -f k8s/mongo-demo-deployment.yaml'
+                sh 'minikube kubectl apply -f k8s/mongodb-deployment.yaml'
             }
         }
     }
