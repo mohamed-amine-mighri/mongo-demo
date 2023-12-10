@@ -2,7 +2,7 @@ pipeline {
     agent any // Add this line to specify the agent
     environment {
         KUBECONFIG = '--insecure-skip-tls-verify'
-        KUBECONFIG = 'kubeConfigFile_new'
+        //KUBECONFIG = 'kubeConfigFile_new'
     }
     tools {
         maven 'Maven'
