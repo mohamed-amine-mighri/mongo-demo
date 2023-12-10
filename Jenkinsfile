@@ -62,11 +62,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                script {
-                    echo 'Deploying the application...'
-                    sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
-                    sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
-                }
+                kubernetesDeploy(
+                    configs: 'k8s/mongo-demo-deployment.yaml', 'k8s/mongodb-deployment.yaml',
+                    kubeconfigId: 'minikubconfig'
+                )
             }
         }
     }
