@@ -62,7 +62,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'kubectl --insecure-skip-tls-verify get pods'
+//                 sh 'kubectl --insecure-skip-tls-verify get pods'
                 sh 'minikube cache add aminemighri/mongo-demo:latest'
                 sh 'minikube cache reload'
                 sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
