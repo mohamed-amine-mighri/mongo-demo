@@ -64,8 +64,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'kubectl apply -f ./k8s/mongo-demo-deployment.yaml'
-                sh 'kubectl apply -f ./k8s/mongodb-deployment.yaml'
+                sh 'kubectl --kubeconfig=\$KUBECONFIG apply -f ./k8s/mongo-demo-deployment.yaml'
+                sh 'kubectl --kubeconfig=\$KUBECONFIG apply -f ./k8s/mongodb-deployment.yaml'
             }
         }
     }
