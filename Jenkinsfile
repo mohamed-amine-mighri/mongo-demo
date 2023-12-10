@@ -62,10 +62,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                kubernetesDeploy(
-                    configs: 'k8s/mongo-demo-deployment.yaml', 'k8s/mongodb-deployment.yaml',
-                    kubeconfigId: 'minikubconfig'
-                )
+                sh 'minikube cache add aminemighri/mongo-demo:latest'
+                sh 'minikube cache reload'
+                sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
+                sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
             }
         }
     }
