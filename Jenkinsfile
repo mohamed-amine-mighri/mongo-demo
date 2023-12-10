@@ -60,17 +60,26 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 script{
-                    kubernetesDeploy(configs: 'k8s/mongo-demo-deployment.yaml, k8s/mongodb-deployment.yaml'kubeconfigId:'kubeConfigFile_new')
+                    kubernetesDeploy(configs: 'k8s/mongo-demo-deployment.yaml, k8s/mongodb-deployment.yaml', kubeconfigId: 'kubeConfigFile_new')
                 }
+            }
+        }
+
+//         stage('Deploy') {
+//             steps {
+//                 script{
+//                     kubernetesDeploy(configs: 'k8s/mongo-demo-deployment.yaml, k8s/mongodb-deployment.yaml'kubeconfigId:'kubeConfigFile_new')
+//                 }
 // //                 sh 'kubectl --insecure-skip-tls-verify get pods'
 //                 //sh 'minikube start'
 //                 //sh 'eval $(minikube docker-env)'
 //                 sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
 //                 sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
-            }
-        }
+            //}
+        //}
     }
 }
