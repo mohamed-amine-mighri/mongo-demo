@@ -67,12 +67,15 @@ pipeline {
 
                     // Set KUBECONFIG environment variable to use a specific kubeconfig file
                     withCredentials([kubeconfig(credentialsId: 'minikubconfig')]) {
-                        sh 'export KUBECONFIG=${KUBECONFIG}; minikube image load aminemighri/mongo-demo:latest'
-                        sh 'export KUBECONFIG=${KUBECONFIG}; kubectl apply -f k8s/mongo-demo-deployment.yaml'
-                        sh 'export KUBECONFIG=${KUBECONFIG}; kubectl apply -f k8s/mongodb-deployment.yaml'
+                        kubeconfig.withKubeConfig([credentialsId: 'minikubconfig']) {
+                            sh 'minikube image load aminemighri/mongo-demo:latest'
+                            sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
+                            sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
+                        }
                     }
                 }
             }
         }
+
     }
 }
