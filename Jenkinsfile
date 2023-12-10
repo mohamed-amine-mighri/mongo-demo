@@ -65,18 +65,12 @@ pipeline {
                 script {
                     echo 'Deploying the application...'
 
-                    // Start Minikube and create the 'minikube' profile
-                    sh 'minikube start -p minikube'
-
-                    // Switch to the 'minikube' profile
-                    sh 'minikube profile minikube'
-
-                    // Load the Docker image into Minikube
-                    sh 'minikube image load aminemighri/mongo-demo:latest'
-
-                    // Apply Kubernetes deployments
-                    sh 'kubectl apply -f k8s/mongo-demo-deployment.yaml'
-                    sh 'kubectl apply -f k8s/mongodb-deployment.yaml'
+                    // Set KUBECONFIG environment variable to use a specific kubeconfig file
+                    withCredentials([kubeconfig(credentialsId: 'minikubconfig')]) {
+                        sh 'export KUBECONFIG=${KUBECONFIG}; minikube image load aminemighri/mongo-demo:latest'
+                        sh 'export KUBECONFIG=${KUBECONFIG}; kubectl apply -f k8s/mongo-demo-deployment.yaml'
+                        sh 'export KUBECONFIG=${KUBECONFIG}; kubectl apply -f k8s/mongodb-deployment.yaml'
+                    }
                 }
             }
         }
