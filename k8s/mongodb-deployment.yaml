@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: PersistentVolumeClaim
 metadata:
-  name: mongodb-deployment-v2
+  name: mongodb-vpc
 spec:
   replicas: 1
   selector:
@@ -29,3 +29,29 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongodb
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: storage
+              mountPath: /data/db
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: mongodb-vpc

@@ -14,9 +14,11 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: "mongodb"
+    container_name: "mongodb-service"
     ports:
       - "27070:27017"
+    volumes:
+      - /home:/data/db
     networks:
       - mynetwork
 

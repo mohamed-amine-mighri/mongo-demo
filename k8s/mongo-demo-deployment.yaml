@@ -17,6 +17,10 @@ spec:
           image: aminemighri/mongo-demo:latest
           ports:
             - containerPort: 9090
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb://mongodb/gte-db
+          imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service

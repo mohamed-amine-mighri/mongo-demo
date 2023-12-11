@@ -57,6 +57,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'amineDockerHub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
                     sh 'docker pull aminemighri/mongo-demo:latest'
+                    sh 'docker-compose -f docker-compose.yml build -t aminemighri/mongo-demo .'
                 }
             }
         }
