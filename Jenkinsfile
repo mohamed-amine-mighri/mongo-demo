@@ -62,21 +62,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-
                 script {
-                // Configure kubectl with the provided kubeconfig
                     withKubeConfig([credentialsId: 'KuberConf']) {
-                    // Deploy the Java Spring app
                     sh """
                           minikube kubectl -- apply -f ./k8s/mongo-demo-deployment.yaml
                           minikube kubectl -- apply -f ./k8s/mongodb-deployment.yaml
                     """
                     }
                 }
-
-//                 sh 'docker pull k8s.gcr.io/kube-apiserver:v1.13.2'
-//                 sh 'kubectl apply -f ./k8s/mongo-demo-deployment.yaml'
-//                 sh 'kubectl apply -f ./k8s/mongodb-deployment.yaml'
             }
         }
     }
