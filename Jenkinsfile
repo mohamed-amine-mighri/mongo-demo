@@ -65,6 +65,8 @@ pipeline {
                 script {
                     withKubeConfig([credentialsId: 'KuberConf']) {
                     sh """
+                          minikube cache add aminemighri/mongo-demo:latest
+                          minikube cache reload
                           minikube kubectl -- apply -f ./k8s/mongo-demo-deployment.yaml
                           minikube kubectl -- apply -f ./k8s/mongodb-deployment.yaml
                     """
