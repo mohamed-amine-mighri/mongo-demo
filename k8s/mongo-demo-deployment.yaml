@@ -21,12 +21,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo-demo-service
+  name: mongodb-demo-service  # Corrected service name here
 spec:
   selector:
     app: mongo-demo
   ports:
     - protocol: TCP
-      port: 9090  # Corrected port here
+      port: 9090
       targetPort: 9090
   type: LoadBalancer
