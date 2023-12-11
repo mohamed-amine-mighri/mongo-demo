@@ -38,7 +38,7 @@ pipeline {
                         sh 'docker info'
 
                         // Build the Docker image using the specified docker-compose file
-                        //sh 'docker-compose -f docker-compose.yml build'
+                        sh 'docker-compose -f docker-compose.yml build -t aminemighri/mongo-demo .'
 
                         // Tag the built image
                         sh 'docker tag aminemighri/mongo-demo aminemighri/mongo-demo:latest'
